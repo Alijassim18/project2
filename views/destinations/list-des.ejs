@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Destinations</title>
+</head>
+<body>
+    <h1>Your Destinations</h1>
+    <ul>
+        <% destinations.forEach(destination => { %>
+            <li>
+                <label>Name:</label> <%= destination.name %> <br>
+                <label>Country:</label> <%= destination.country %> <br>
+                <label>Visited:</label> <%= destination.visited ? "Yes" : "No" %>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
+</body>
+</html>
