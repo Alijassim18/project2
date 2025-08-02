@@ -13,7 +13,7 @@ const destinationSchema= new mongoose.Schema({
     visited:{
         type:Boolean,default:false
     },
-     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' ,require:true}
 })
 
 // model
