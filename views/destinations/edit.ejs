@@ -5,6 +5,7 @@
   <title>Edit Destination</title>
 </head>
 <body>
+      <%- include('../partials/navbar') %>
   <h1>Edit Destination</h1>
 
   <form action="/destinations/<%= destination._id %>?_method=PUT" method="POST">
