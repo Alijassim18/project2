@@ -15,12 +15,17 @@ router.get("/new",async(req,res)=>{
 })
 router.post("/",isSignedIn, async (req, res) => {
   try {
-    await Destination.create({
-      name: req.body.name,
-      country: req.body.country,
-      visited: req.body.visited === "on",
-      userId: req.session.user._id,
-    });
+await Destination.create({
+  name: req.body.name,
+  country: req.body.country,
+  visited: req.body.visited === 'on',
+    userId: req.session.user._id,
+  description: req.body.description,
+  category: req.body.category,
+  image: req.body.image,
+  datePlanned: req.body.datePlanned,
+});
+
     res.redirect("/destinations/new")
   } catch (error) {
     console.log(error);
@@ -58,12 +63,17 @@ router.put("/:id", async (req, res) => {
       name: req.body.name,
       country: req.body.country,
       visited: req.body.visited === "on",
+      description: req.body.description,
+      category: req.body.category,
+      image: req.body.image,
+      datePlanned: req.body.datePlanned ? new Date(req.body.datePlanned) : null
     });
-    res.redirect("/destinations");
+    res.redirect("/destinations/list");
   } catch (err) {
     res.send("Error updating destination");
   }
-})
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     await Destination.findByIdAndDelete(req.params.id);

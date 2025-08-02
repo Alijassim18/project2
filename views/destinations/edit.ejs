@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Destination</title>
+</head>
+<body>
+  <h1>Edit Destination</h1>
+
+  <form action="/destinations/<%= destination._id %>?_method=PUT" method="POST">
+    <label for="name">Name:</label>
+    <input name="name" id="name" type="text" value="<%= destination.name %>" required><br>
+
+    <label for="country">Country:</label>
+    <input name="country" id="country" type="text" value="<%= destination.country %>" required><br>
+
+    <label for="visited">Visited:</label>
+    <input type="checkbox" name="visited" <%= destination.visited ? "checked" : "" %>><br>
+
+    <label for="description">Description:</label><br>
+    <textarea name="description" id="description" ><%= destination.description || "" %></textarea><br>
+
+    <label for="category">Category:</label>
+    <select name="category" id="category">
+      <option value="Beach" <%= destination.category === 'Beach' ? 'selected' : '' %>>Beach</option>
+      <option value="City" <%= destination.category === 'City' ? 'selected' : '' %>>City</option>
+      <option value="Desert" <%= destination.category === 'Desert' ? 'selected' : '' %>>Desert</option>
+      <option value="Other" <%= destination.category === 'Other' ? 'selected' : '' %>>Other</option>
+    </select><br>
+
+    <label for="image">Image URL:</label>
+    <input type="text" name="image" id="image" value="<%= destination.image || '' %>"><br>
+
+    <label for="datePlanned">Planned Date:</label>
+    <input type="date" name="datePlanned" id="datePlanned"
+           value="<%= destination.datePlanned ? destination.datePlanned.toISOString().split('T')[0] : '' %>"><br>
+
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
