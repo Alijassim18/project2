@@ -3,11 +3,11 @@ const mongoose=require('mongoose')
 
 const destinationSchema= new mongoose.Schema({
     name:{
-        type:string,
+        type:String,
         require:true
     },
     country:{
-        type:string,
+        type:String,
         require:true 
     },
     visited:{
