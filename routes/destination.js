@@ -42,6 +42,36 @@ router.get("/list", isSignedIn, async (req, res) => {
         console.log(error);
         res.send("Error retrieving destinations")
     }
-});
+})
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const destination = await Destination.findById(req.params.id);
+    res.render("destinations/edit.ejs", { destination });
+  } catch (err) {
+    res.send("Error loading edit form");
+  }
+})
+
+router.put("/:id", async (req, res) => {
+  try {
+    await Destination.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      country: req.body.country,
+      visited: req.body.visited === "on",
+    });
+    res.redirect("/destinations");
+  } catch (err) {
+    res.send("Error updating destination");
+  }
+})
+router.delete("/:id", async (req, res) => {
+  try {
+    await Destination.findByIdAndDelete(req.params.id);
+    res.redirect("/destinations");
+  } catch (err) {
+    res.send("Error deleting destination")
+  }
+})
+
 
 module.exports = router
