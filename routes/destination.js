@@ -21,11 +21,27 @@ router.post("/",isSignedIn, async (req, res) => {
       visited: req.body.visited === "on",
       userId: req.session.user._id,
     });
-    res.redirect("/destinations/new");
+    res.redirect("/destinations/new")
   } catch (error) {
     console.log(error);
-    res.send("Error creating destination");
+    res.send("Error creating destination")
   }
+})
+
+
+router.get("/list", isSignedIn, async (req, res) => {
+    try {
+        const userId = req.session.user._id
+        const destinations = await Destination.find({ userId: userId })
+        
+        res.render("destinations/list-des.ejs", {
+            destinations: destinations,
+            user: req.session.user,
+        });
+    } catch (error) {
+        console.log(error);
+        res.send("Error retrieving destinations")
+    }
 });
 
 module.exports = router
