@@ -12,7 +12,8 @@ const destinationSchema= new mongoose.Schema({
     },
     visited:{
         type:Boolean,default:false
-    }
+    },
+     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 // model
