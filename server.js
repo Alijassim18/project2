@@ -6,6 +6,7 @@ const morgan = require("morgan")
 const methodOverride = require("method-override")
 const conntectToDB = require('./config/db')
 const destinationRoutes = require("./routes/destination")
+const authRoutes=require("./routes/auth")
 
 
 
@@ -38,6 +39,7 @@ conntectToDB()
 
 // Routes go here
 app.use("/destinations",destinationRoutes)
+app.use("/auth",authRoutes)
 
 
 
