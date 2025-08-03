@@ -3,58 +3,109 @@ const User = require("../models/user")
 const bcrypt = require("bcrypt")
 
 
-router.get("/sign-up",(req,res)=>{
-    res.render("auth/sign-up.ejs")
+router.get("/sign-up", (req, res) => {
+    res.render("auth/sign-up.ejs", { error: null })
 })
 
-router.post("/sign-up",async(req,res)=>{
-    try{
+router.post("/sign-up", async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-        
-        const hashedPassword = bcrypt.hashSync(req.body.password,10) // encrypts our password
-
-        req.body.password = hashedPassword
-
-        await User.create(req.body)
-
-        res.redirect("/auth/login")
-    }
-    catch(error){
-        console.log(error)
-    }
-})
-
-
-router.get("/login",(req,res)=>{
-    res.render("auth/login.ejs")
-})
-
-router.post("/login",async(req,res)=>{
-    try{
-        const foundUser = await User.findOne({username:req.body.username})
-        console.log(req.body)
-        const validPassword = bcrypt.compareSync(req.body.password,foundUser.password)
-        console.log(validPassword)
-
-        if(!validPassword){
-            return res.send("Password is incorrect")
-        }  
-        // creates a session for our user once they are logged in
-        req.session.user = {
-            username: foundUser.username,
-            _id: foundUser._id
+        // VALIDATION
+        //  Check if all the necessary fields are there
+        if (!username || !password) {
+            return res.render("auth/sign-up", {
+                error: "All fields are required."
+            });
         }
 
-        res.redirect("/destinations/new")
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailRegex.test(email)) {
+        //     return res.render("auth/sign-up", {
+        //         error: "Please enter a valid email address."
+        //     });
+        // }
 
-    }
-    catch(error){
+        if (password.length < 6) {
+            return res.render("auth/sign-up", {
+                error: "Password must be at least 6 characters long."
+            });
+        }
 
+        // Do we already have this person in our database?
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.render("auth/sign-up.ejs", {
+                error: "Username is already taken."
+
+            });
+        }
+
+
+        // Hash password and create user
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        const newUser = {
+            username,
+            password: hashedPassword,
+        };
+
+        await User.create(newUser);
+
+        // Redirect to Login
+        res.redirect("/auth/login");
+
+    } catch (error) {
+        console.error("Sign-up error:", error);
+        res.render("auth/sign-up", {
+            error: "Something went wrong. Please try again."
+        });
     }
+});
+
+
+
+router.get("/login", (req, res) => {
+    res.render("auth/login.ejs", { error: null })
 })
 
+router.post("/login", async (req, res) => {
+    try {
+        const userInDatabase = await User.findOne({ username: req.body.username });
+         const { username, password } = req.body;
+           if (!username || !password) {
+            return res.render("auth/login", {
+                error: "All fields are required."
+            });
+        }
+       
+        if (!userInDatabase) {
+            return res.render("auth/login", { error: "Username not found." });
+        }
 
-router.get("/logout",(req,res)=>{
+        const validPassword = bcrypt.compareSync(
+            req.body.password,
+            userInDatabase.password
+        );
+
+        if (!validPassword) {
+            return res.render("auth/login", { error: "Incorrect password." });
+        }
+
+        req.session.user = {
+            username: userInDatabase.username,
+            _id: userInDatabase._id,
+        };
+
+        res.redirect("/destinations/new");
+    } catch (error) {
+        console.error("Error during sign-in:", error);
+        res.render("auth/sign-in", { error: "An unexpected error occurred." });
+    }
+});
+
+
+
+router.get("/logout", (req, res) => {
     req.session.destroy()
     res.redirect("/auth/login")
 })

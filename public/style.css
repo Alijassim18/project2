@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: white;
+  margin: 0;
+  padding: 20px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+nav {
+  margin-bottom: 20px;
+  background: green;
+  padding: 10px 15px;
+  border-radius: 0 0 5px 5px;
+  text-align: center;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration:none;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: green;
+  text-align: center;
+}
+
+form {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+input[type="password"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid gainsboro;
+  border-radius: 3px;
+  font-size:16px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+  vertical-align: middle;
+}
+
+button {
+  margin-top: 20px;
+  background-color: green;
+  border: none;
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color  ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+a {
+  color: green;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #218838;
+}
+
+a:focus {
+  outline: none;
+  background-color: whitesmoke;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+li {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: black;
+  margin: 20px 0;
+}
+
+img {
+  margin-top: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+li a {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+form {
+  display: inline;
+}
+.password{
+   width: 100%;
+  max-width: 600px;
+}
+
+#deleteBtn {
+  background-color: red;
+  margin-top: 10px;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 20px;
+}
+
+#deleteBtn:hover {
+  background-color: darkred;
+}
+#auth{
+  color: red;
+  font-size: medium;
+}

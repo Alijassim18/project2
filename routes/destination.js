@@ -9,12 +9,13 @@ const isSignedIn = require("../middleware/isSignedIn")
 
 // write your routes
 
-router.get("/new",async(req,res)=>{
+router.get("/new",isSignedIn,async(req,res)=>{
     const allDestination= await Destination.find()
     res.render("destinations/new.ejs",{allDestination: allDestination,user:req.session.user})
 })
 router.post("/",isSignedIn, async (req, res) => {
   try {
+    
 await Destination.create({
   name: req.body.name,
   country: req.body.country,
@@ -28,8 +29,7 @@ await Destination.create({
 
     res.redirect("/destinations/new")
   } catch (error) {
-    console.log(error);
-    res.send("Error creating destination")
+    console.error(err);
   }
 })
 
@@ -44,8 +44,7 @@ router.get("/list", isSignedIn, async (req, res) => {
             user: req.session.user,
         });
     } catch (error) {
-        console.log(error);
-        res.send("Error retrieving destinations")
+           console.error(err);
     }
 })
 router.get("/:id/edit", async (req, res) => {
@@ -53,7 +52,7 @@ router.get("/:id/edit", async (req, res) => {
     const destination = await Destination.findById(req.params.id);
     res.render("destinations/edit.ejs", { destination });
   } catch (err) {
-    res.send("Error loading edit form");
+   console.error(err);
   }
 })
 
@@ -70,16 +69,16 @@ router.put("/:id", async (req, res) => {
     });
     res.redirect("/destinations/list");
   } catch (err) {
-    res.send("Error updating destination");
+     console.error(err);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
     await Destination.findByIdAndDelete(req.params.id);
-    res.redirect("/destinations");
+    res.redirect("/destinations/list");
   } catch (err) {
-    res.send("Error deleting destination")
+      console.error(err);
   }
 })
 

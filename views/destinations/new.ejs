@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+       <link rel="stylesheet" href="/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Destination page</title>
 </head>
@@ -11,10 +12,10 @@
     <form action="/destinations" method="post">
 
         <label for="name">Destination Name:</label>
-        <input id="name" name="name" type="text">
+        <input id="name" name="name" type="text" required>
 
         <label for="country">Country:</label>
-        <input id="country" name="country" type="text">
+        <input id="country" name="country" type="text" required>
 
         <label for="visited">visited:</label>
         <input name="visited" id="visited" type="checkbox">
@@ -29,7 +30,7 @@
       <option value="Other" selected>Other</option>
     </select><br>
 
-    <label for="image">Image URL:</label>
+    <label for="image">Image</label>
     <input id="image" name="image" type="text"><br>
 
     <label for="datePlanned">Planned Date:</label>

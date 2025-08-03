@@ -33,6 +33,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+app.set('view engine', 'ejs');
 app.use(passUserToView)
 
 
