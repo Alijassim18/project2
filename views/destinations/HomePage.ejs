@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="/style.css" />
+    <title> Home Page</title>
+</head>
+<body>
+    <% if(user){ %>
+        <%- include('../partials/navbar') %>
+           <h1>Welcome <%= user.username %> </h1>
+    <p>Your Travel Bucket List starts here — begin exploring and adding your dream destinations. Adventure awaits!</p>
+        <% } %>
+    
+</body>
+</html>

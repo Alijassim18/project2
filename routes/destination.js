@@ -8,6 +8,9 @@ const isSignedIn = require("../middleware/isSignedIn")
 
 
 // write your routes
+router.get("/HomePage",isSignedIn,async(req,res)=>{
+  res.render("destinations/HomePage.ejs",{user:req.session.user})
+})
 
 router.get("/new",isSignedIn,async(req,res)=>{
     const allDestination= await Destination.find()
