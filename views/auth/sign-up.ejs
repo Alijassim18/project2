@@ -12,13 +12,9 @@
     <form action="/auth/sign-up" method="post">
         <label for="username">username:</label>
         <input type="text" name="username" id="username">
-        <label for="name">name:</label>
-        <input type="text" name="name" id="name">
-          <label for="birthday">birthday:</label>
-        <input type="date" name="birthday" id="birthday">
-
         <label for="password">password:</label>
         <input type="password" name="password" id="password">
+        <label for="hint">Hint: The password must start with a capital letter, end with a lowercase letter, and contain five digits in between</label>
    <label for="auth"name="auth" id="auth"> <%= error %></label>
         <button>Sign Up</button>
     </form>
