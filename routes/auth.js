@@ -9,7 +9,7 @@ router.get("/sign-up", (req, res) => {
 
 router.post("/sign-up", async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username,name,birthday,password} = req.body;
 
         // VALIDATION
         //  Check if all the necessary fields are there
@@ -19,16 +19,10 @@ router.post("/sign-up", async (req, res) => {
             });
         }
 
-        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // if (!emailRegex.test(email)) {
-        //     return res.render("auth/sign-up", {
-        //         error: "Please enter a valid email address."
-        //     });
-        // }
-
-        if (password.length < 6) {
+        const passwordRegex=/([A-Z])+([0-9]{5})+[a-z]/
+        if (!passwordRegex.test(password) ) {
             return res.render("auth/sign-up", {
-                error: "Password must be at least 6 characters long."
+                error: "Password must be contain capital letter in first, wirte any five number, and in the end small letter "
             });
         }
 
@@ -46,6 +40,8 @@ router.post("/sign-up", async (req, res) => {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const newUser = {
             username,
+            name,
+            birthday,
             password: hashedPassword,
         };
 

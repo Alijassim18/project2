@@ -36,7 +36,7 @@
 
         <a href="/destinations/<%= destination._id %>/edit">Edit</a>
 
-        <form action="/destinations/<%= destination._id %>?_method=DELETE" method="POST">
+        <form class="deleteF" action="/destinations/<%= destination._id %>?_method=DELETE" method="POST">
           <button type="submit" id="deleteBtn">Delete</button>
         </form>
       </li>
